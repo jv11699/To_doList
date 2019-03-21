@@ -1,4 +1,5 @@
-# to_dolist
+# to-do List website
+this is a to-do list website similar to to-do list apps 
 
 ## Project setup
 ```
