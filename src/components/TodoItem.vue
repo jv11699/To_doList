@@ -1,10 +1,9 @@
 <template>
     <div class = "todo-item" v-bind:class ="{'is-complete':todo.completed, 'todo-itemOnDel':todo.delete}">
         <p>
-            <input type = "checkbox" v-on:change = "markComplete" >
-            {{todo.title}}
-            <button  @click="$emit('del-todo', todo.id)" class = "del" v-on:click = "deleteItem()" > x </button>
-
+            <input contenteditable="false" type = "checkbox" v-on:change = "markComplete" >
+            <b contenteditable="true">{{todo.title}}</b>
+            <button contenteditable="false"  @click="$emit('del-todo', todo.id)" class = "del" v-on:click = "deleteItem()" > x </button>
         </p>
     </div>
 </template>
@@ -57,6 +56,9 @@
         cursor: pointer;
         float: right;
 
+    }
+    b{
+        font-weight: normal;
     }
     @keyframes DELETE {
      from {background-color:lightgrey; left:200px}
