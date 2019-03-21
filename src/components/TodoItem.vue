@@ -1,9 +1,9 @@
 <template>
-    <div class = "todo-item" v-bind:class ="{'is-complete':todo.completed}">
+    <div class = "todo-item" v-bind:class ="{'is-complete':todo.completed, 'todo-itemOnDel':todo.delete}">
         <p>
-            <input type = "checkbox" v-on:change = "markComplete">
+            <input type = "checkbox" v-on:change = "markComplete" >
             {{todo.title}}
-            <button @click="$emit('del-todo', todo.id)" class = "del"> x </button>
+            <button  @click="$emit('del-todo', todo.id)" class = "del" v-on:click = "deleteItem()" > x </button>
 
         </p>
     </div>
@@ -11,19 +11,37 @@
 
 <script>
     export default {
+
         name: "TodoItem",
         props: ["todo"],
         methods: {
             markComplete(){
-                this.todo.completed =  !this.todo.completed;
+                this.todo.completed =  !this.todo.completed; //makes the todo boolean false
+            },
+            deleteItem(){
+                this.todo.delete =  true;
+            },
+            emit(){
+               //this.emit()"$emit('del-todo', todo.id)"
             }
         }
+
     }
 </script>
 
 <style scoped>
+     .todo-itemOnDel {
+        background: lightgrey;
+        padding: 10px;
+        position: relative;
+        border-bottom: 1px #ccc dotted;
+        animation-name: DELETE;
+        animation-duration: 1s;
+
+
+    }
     .todo-item {
-        background: bisque;
+        background: lightgrey;
         padding: 10px;
         border-bottom: 1px #ccc dotted;
     }
@@ -38,7 +56,11 @@
         border-radius: 50%;
         cursor: pointer;
         float: right;
-    }
 
+    }
+    @keyframes DELETE {
+     from {background-color:lightgrey; left:200px}
+        to{background-color:red; left:1800px }
+    }
 
 </style>

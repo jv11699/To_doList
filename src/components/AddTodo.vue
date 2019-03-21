@@ -22,11 +22,12 @@
                 const newTodo = {
                     id: uuid.v4(),
                     title: this.title,
-                    completed: false
+                    completed: false,
+                    delete:false
                 }
                 //send up to parent
                 this.$emit('add-todo', newTodo);
-               // this.title = ''; //when clicked it will disappear
+                this.title = ''; //when clicked it will disappear
             }
         }
     }

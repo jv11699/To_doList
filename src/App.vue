@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
      <AddTodo v-on:add-todo="addTodo"/>
-    <Todos v-bind:todos = "todos" v-on:del-todo="deleteTodo"/>
+    <Todos v-bind:todos = "sort()" v-on:del-todo="deleteTodo"/>
   </div>
 </template>
 
@@ -23,20 +23,23 @@ export default {
               { //these are testing
                  id: 1,
                  title: "Todo One",
-                 completed: true,
-                 date:  3
+                 completed: false,
+                 date:  3,
+                 delete: false
               },
               {
                   id: 2,
                   title: "Todo Two",
-                  completed: true,
-                  date: 4
+                  completed: false,
+                  date: 4,
+                  delete: false
               },
               {
                   id: 3,
                   title: "todo three",
-                  completed: false,
-                  date: 1
+                  completed: true,
+                  date: 1,
+                  delete: false
 
               }
           ]
@@ -45,12 +48,33 @@ export default {
     methods:{
       deleteTodo(id){
           //filter a high order function
+
           this.todos = this.todos.filter(todo => todo.id !== id);
+
       },
+
       addTodo(newTodo){
-      //this uses the spread operator
-      this.todos = [...this.todos, newTodo];
-      }
+
+          //it adds to a portion before the checked ones
+          for(var i =0; i < this.todos.length; i++){
+              if(this.todos[i].completed){
+                  break;
+              }
+          }
+          //inserts the new todo before a complete one
+          newTodo.title != ''?this.todos.splice(i,0,newTodo): alert("You Must Type in Something");
+      },
+        sort(){
+          /*   SORTS THE ITEMS ACCORDINGLY
+             for(var i = 0; i < this.todos.length; i++){
+                    if(this.todos[i].completed){
+                        var temp = {id: this.todos[i].id,title: this.todos[i].title, completed:false}
+                        //this.todos.splice(i,1);
+                        this.todos.push(temp)
+                    }
+                }*/
+                return this.todos;
+            }
     }
 
 
@@ -61,12 +85,14 @@ export default {
 <style>
   *{
     box-sizing: border-box;
-    margin: 0;
+    margin: 12px;
     padding: 0;
   }
   body{
     font-family: Arial, Melvetica, sans-serif;
+    text-align: center;
     line-height: 1.4;
+    overflow-x: hidden;
   }
   .btn{
       display: inline-block;
