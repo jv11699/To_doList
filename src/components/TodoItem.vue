@@ -30,10 +30,8 @@
 
 <style scoped>
      .todo-itemOnDel {
-        background: lightgrey;
-        padding: 10px;
+
         position: relative;
-        border-bottom: 1px #ccc dotted;
         animation-name: DELETE;
         animation-duration: 1s;
 

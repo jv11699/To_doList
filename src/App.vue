@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
      <AddTodo v-on:add-todo="addTodo"/>
-    <Todos v-bind:todos = "sort()" v-on:del-todo="deleteTodo"/>
+    <Todos v-bind:todos = "sort()" v-on:del-todo="deleteTodoItem"/>
   </div>
 </template>
 
@@ -52,7 +52,9 @@ export default {
           this.todos = this.todos.filter(todo => todo.id !== id);
 
       },
-
+      deleteTodoItem(id){
+          setTimeout(this.deleteTodo.bind(null,id),700);
+      },
       addTodo(newTodo){
 
           //it adds to a portion before the checked ones
